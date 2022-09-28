@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n,temp, sum=0, rem;
+    cin>>n;
+    while(n>0){
+        rem= n%10;
+        sum=sum+rem;
+        n=n/10;
+    }
+    cout<<sum<<endl;
+
+    return 0;
+}
+
+
+
+/**************/
+
+
+#include <iostream>
+
+using namespace std;
+
+int sum(int n){
+    
+    if(n==0){
+        return 0;
+    }
+    else{
+        
+        return (n%10) + sum(n/10);
+    }
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    cout<<sum(n);
+
+    return 0;
+}

@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int n,temp, rem, rev=0;
+   cin>>n;
+   temp=n;
+   while(n>0){
+       rem= n%10;
+       rev= rev*10 +rem;
+       n=n/10;
+   }
+   cout<<"rev is "<<rev<<endl;
+   if(temp==rev){
+       cout<<"palindrome"<<endl;
+   }
+   else{
+       cout<<"not palindrome";
+   }
+
+    return 0;
+}
+
+
+/**************/
+//recursion
+
+
+#include <iostream>
+
+using namespace std;
+int sum=0;
+int rev(int n){
+    
+    if(n==0){
+        return sum;
+    }
+    else{
+        sum= sum*10 + (n%10);
+        return rev(n/10);
+    }
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    cout<<rev(n);
+
+    return 0;
+}
