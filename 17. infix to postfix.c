@@ -49,21 +49,9 @@ char stacktop(){
 }
 
 /********************************/
-int prcd(char a1 , char a2){
-    if(a1=='('){
-        return FALSE;
-    }
-    else{
-        if(a2=='('){
-            return FALSE;
-        }
-        else{
-            if(a2==')'){
-                return TRUE;
-            }
-            else{
-                if((a1=='^') || (a1=='*') || (a1=='/') || (a1=='%')){
-        if(a2=='^'){
+int prcd(char a,char b){
+    if(a=='^' || a=='*' || a=='/' || a=='%'){
+        if(b=='^'){
             return FALSE;
         }
         else{
@@ -71,19 +59,14 @@ int prcd(char a1 , char a2){
         }
     }
     else{
-        if((a1=='+') || (a1=='-')){
-            if((a2=='+') || (a2=='-')){
-                return TRUE;
-            }
-            else{
-                return FALSE;
-            }
+        if(b=='+' || b=='-'){
+            return TRUE;
+        }
+        else{
+            return FALSE;
         }
     }
 }
-            }
-        }
-    }
 /********************************/
 void infixtopost(char infix[]){
     int i=0,p=0;

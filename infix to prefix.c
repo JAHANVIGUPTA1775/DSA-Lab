@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define STACKSIZE 10
+#define STACKSIZE 20
 #define TRUE 1
 #define FALSE 0
 struct stack{
@@ -49,21 +49,9 @@ char stacktop(){
 }
 
 /********************************/
-int prcd(char a1 , char a2){
-    if(a1=='('){
-        return FALSE;
-    }
-    else{
-        if(a2=='('){
-            return FALSE;
-        }
-        else{
-            if(a2==')'){
-                return TRUE;
-            }
-            else{
-                if((a1=='^') || (a1=='*') || (a1=='/') || (a1=='%')){
-        if(a2=='^'){
+prcd(char a,char b){
+    if(a=='^' || a=='*' || a=='/' || a=='%'){
+        if(b=='^'){
             return FALSE;
         }
         else{
@@ -71,58 +59,51 @@ int prcd(char a1 , char a2){
         }
     }
     else{
-        if((a1=='+') || (a1=='-')){
-            if((a2=='+') || (a2=='-')){
-                return TRUE;
-            }
-            else{
-                return FALSE;
-            }
+        if(b=='+' || b=='-'){
+            return TRUE;
+        }
+        else{
+            return FALSE;
         }
     }
 }
-            }
-        }
-    }
 /********************************/
-void infixtopost(char infix[]){
+void infixtoprefix(char infix[]){
     int i=0,p=0;
-    char postfix[20];
+    char prefix[20];
     char x,symbol;
     initialise();
+    strrev(infix);
     while(infix[i]!='\0'){
         symbol=infix[i];
         i++;
         if(symbol>='a' && symbol<='z'){
-            postfix[p]=symbol;
+            prefix[p]=symbol;
             p++;
         }
         else{
-            while(!isempty() && prcd(stacktop(),symbol)){
+            while(!isempty() && !prcd(symbol,stacktop())){
                   x=pop();
-                  postfix[p]=x;
+                  prefix[p]=x;
                   p++;
             }
-            if(symbol==')'){
-                pop();
-            }
-            else{
             push(symbol);
-            }
         }
     }
     while(!isempty()){
         x=pop();
-        postfix[p]=x;
+        prefix[p]=x;
         p++;
     }
-    postfix[p]='\0';
-    printf("%s",postfix);
+    prefix[p]='\0';
+    strrev(prefix);
+    
+    printf("%s",prefix);
 }
 /********************************/
 
 int main(){
     char infix[20];
     gets(infix);
-    infixtopost(infix);
+    infixtoprefix(infix);
 }
